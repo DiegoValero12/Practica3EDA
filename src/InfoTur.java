@@ -41,20 +41,31 @@ public class InfoTur {
 	
 	public int numTop() {
 		int ret=0;
-		char[] nuevoTop=top.toCharArray();
-		if(nuevoTop[0]=='*') {
-			if(nuevoTop[1]=='*') {
-				if(nuevoTop[2]=='*') {
-					ret=3;
+		if(top!="") {
+			char[] nuevoTop=top.toCharArray();
+			if(nuevoTop.length>=0) {
+				if(nuevoTop[0]=='*') {
+					if(nuevoTop.length>=1) {
+						if(nuevoTop[1]=='*') {
+							if(nuevoTop.length>=2) {
+								if(nuevoTop[2]=='*') {
+									ret=3;
+								}
+								else {
+									ret=2;
+								}
+							}	
+						}
+						else {
+							ret=1;
+						}
+					}
+					
 				}
-				else {
-					ret=2;
-				}
-			}
-			else {
-				ret=1;
 			}
 		}
+		
+		
 		
 		return ret;
 	}

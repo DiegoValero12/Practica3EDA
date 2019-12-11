@@ -87,7 +87,7 @@ public class GrafLoc {
 		
 		for(int i=0;i<gr.size();i++) {
 			for(int j=0;j<gr.get(0).size();j++) {
-				if(i==o1 || j==o1) {
+				if((i==o1 || j==o1) && gr.get(i).get(j)!=Integer.MAX_VALUE) {
 					gr.get(i).set(j, Integer.MAX_VALUE);
 					ret=true;
 				}
@@ -127,6 +127,17 @@ public class GrafLoc {
 			cont++;
 		}
 		
+		if(gr.size()!=cont) {
+			gr.clear();
+			for(int i=0;i<cont;i++) {
+				ArrayList<Integer> lineaGraf=new ArrayList<>();
+				for(int j=0;j<cont;j++) {
+					lineaGraf.add(Integer.MAX_VALUE);
+				}
+				gr.add(lineaGraf);
+			}
+		}
+		
 		Iterator<Localidad2> it1=ret.iterator();
 		while(it1.hasNext()) {
 			Localidad2 aux1=it1.next();
@@ -137,7 +148,6 @@ public class GrafLoc {
 				gr.get(aux1.getVertice()).set(aux2.getVertice(), calculaDistancia(aux1, aux2));
 			}	
 		}
-
 		
 		return ret;
 	}
@@ -185,17 +195,28 @@ public class GrafLoc {
 	}
 	
 	public void recursiva(int i) {
-		marcados.add(i);
-		for(int j=0;j<gr.get(0).size();j++) {
-			if(gr.get(i).get(j)!=Integer.MAX_VALUE && gr.get(i).get(j)!=0 && !marcados.contains(j)) {
-
+		if(!marcados.contains(i)) {
+			marcados.add(i);
+		}
+		boolean encontrado=false;
+		for(int j=0;j<gr.size();j++) {
+			if(gr.get(i).get(j)!=Integer.MAX_VALUE && gr.get(i).get(j)!=0 && !marcados.contains(j)) {	
+				encontrado=true;
 				recursiva(j);
+				j=0;
 			}
 		}
 	}
 	
 	public void escribeDFS(int i) {
-		recursiva(i);
+		if(i<gr.size() && i>=0) {
+			recursiva(i);
+			for(int j=0;j<gr.size();j++) {
+				if(!marcados.contains(j)) {
+					recursiva(j);
+				}
+			}
+		}
 		String s="";
 		for(int j=0;j<marcados.size();j++) {
 			if(j!=marcados.size()-1) {
@@ -205,7 +226,7 @@ public class GrafLoc {
 				s=s+marcados.get(j);
 			}
 		}
-		System.out.println(s);
+		System.out.print(s);
 		marcados.clear();
 	}
 	

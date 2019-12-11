@@ -46,23 +46,33 @@ public class TNear {
 		}
 	}
 	
-	public boolean borraLocalidades(String s) {
+	
+	
+	public boolean borraLocalidad(String s) {
 		boolean ret=false;
 		
+		ArrayList<Localidad2> aBorrarClave=new ArrayList<>();
 		for(Localidad2 it:ti.keySet()) {
 			if(it.getNombre()==s) {
-				ti.remove(it);
+				aBorrarClave.add(it);
 				ret=true;
 			}
 			else {
+				ArrayList<Localidad2> aBorrarValor=new ArrayList<>();
 				Iterator<Localidad2> recorre=ti.get(it).iterator();
 				while(recorre.hasNext()) {
 					Localidad2 aux=recorre.next();
 					if(aux.getNombre()==s) {
-						ti.get(it).remove(aux);
+						aBorrarValor.add(aux);
 					}
 				}
+				for(int cont=0;cont<aBorrarValor.size();cont++) {
+					ti.get(it).remove(aBorrarValor.get(cont));
+				}
 			}
+		}
+		for(int cont=0;cont<aBorrarClave.size();cont++) {
+			ti.remove(aBorrarClave.get(cont));
 		}
 		
 		return ret;

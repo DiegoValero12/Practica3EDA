@@ -73,7 +73,7 @@ public class main {
 		System.out.println(gr.get(0));
 		System.out.println(gr);
 		*/
-		
+		/*
 		Localidad loc = new Localidad("Barcelona");
 		Localidad loc2 = new Localidad("Madrid");
 		
@@ -104,7 +104,7 @@ public class main {
 			System.out.println(aux + " "+ "Vertice: "+aux.getVertice());
 		}
 		
-		*/
+		
 		System.out.println("-----------------------");
 		GrafLoc gra = new GrafLoc(8);
 		System.out.println(gra);
@@ -122,8 +122,23 @@ public class main {
 		System.out.println(gra);
 		gra.escribeDFS(0);
 		
+		*/
+		if(args.length>=2) {
+			
+			String s = args[0];
+			int origen = Integer.parseInt(args[1]);
+			
+			Coleccion c = new Coleccion();
+			c.lectura(s);
+			GrafLoc grafo = new GrafLoc(c.getLocalidades().size());
+			TreeSet<Localidad2> tree= grafo.insertaLocalidades(c);
+				
+			ArrayList<Integer> marcados = new ArrayList<>();
+			marcados.add(origen);
+			
+			System.out.println("---Muestro mi grafo: -----");
+			System.out.println(grafo);
 		
-		
-		
+		}
 	}
 }
