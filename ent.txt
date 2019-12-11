@@ -1,0 +1,33 @@
+MMMMM
+MTTTM
+MTTTM
+MMMMM
+<LOCALIDAD>
+Aaaaa
+1 1
+<INFO>
+aeropuerto
+restaurante 1
+hotel 5
+<LOCALIDAD>
+Ddd
+2 2
+<INFO>
+museo 8
+monumento 2
+hotel 10
+<LOCALIDAD>
+Cccc
+1 2
+<INFO>
+restaurante 2
+aeropuerto
+** importante1
+hotel 7
+monumento 21
+<LOCALIDAD>
+Calari
+2 1
+<INFO>
+aeropuerto
+*** importante3
