@@ -40,10 +40,13 @@ public class TNear {
 	}
 	
 	public void insertaLocalidades(Coleccion c) {
-		for(int i=0;i<c.getLocalidades().size();i++) {
-			Localidad2 aux=new Localidad2(c.getLocalidades().get(i));
-			this.insertaLocalidad2(aux);
+		if(c!=null){
+			for(int i=0;i<c.getLocalidades().size();i++) {
+				Localidad2 aux=new Localidad2(c.getLocalidades().get(i));
+				this.insertaLocalidad2(aux);
+			}
 		}
+		
 	}
 	
 	
@@ -53,7 +56,7 @@ public class TNear {
 		
 		ArrayList<Localidad2> aBorrarClave=new ArrayList<>();
 		for(Localidad2 it:ti.keySet()) {
-			if(it.getNombre()==s) {
+			if(it.getNombre().equals(s)) {
 				aBorrarClave.add(it);
 				ret=true;
 			}
@@ -62,7 +65,7 @@ public class TNear {
 				Iterator<Localidad2> recorre=ti.get(it).iterator();
 				while(recorre.hasNext()) {
 					Localidad2 aux=recorre.next();
-					if(aux.getNombre()==s) {
+					if(aux.getNombre().equals(s)) {
 						aBorrarValor.add(aux);
 					}
 				}
@@ -82,7 +85,7 @@ public class TNear {
 		TreeSet<Localidad2> ret=null;
 		
 		for(Localidad2 it:ti.keySet()) {
-			if(it.getNombre()==s) {
+			if(it.getNombre().equals(s)) {
 				return ti.get(it);
 			}
 		}
@@ -97,6 +100,14 @@ public class TNear {
 		dn=i;
 		for(Localidad2 it:ti.keySet()) {
 			ArrayList<Localidad2> aBorrar=new ArrayList<>();
+			ArrayList<Localidad2> aMeter=new ArrayList<>();
+			for(Localidad2 it2:ti.keySet()){
+				if(!it.equals(it2)){
+					if(GrafLoc.calculaDistancia(it, it2)<=dn) {
+						aMeter.add(it2);
+					}
+				}
+			}
 			Iterator<Localidad2> iter=ti.get(it).iterator();
 			while(iter.hasNext()) {
 				Localidad2 aux=iter.next();
@@ -106,6 +117,9 @@ public class TNear {
 			}
 			for(int cont=0;cont<aBorrar.size();cont++) {
 				ti.get(it).remove(aBorrar.get(cont));
+			}
+			for(int cont=0;cont<aMeter.size();cont++) {
+				ti.get(it).add(aMeter.get(cont));
 			}
 		}
 	}

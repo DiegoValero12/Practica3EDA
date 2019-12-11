@@ -73,8 +73,8 @@ public class GrafLoc {
 	public boolean borraArista(int o1, int o2) {
 		boolean ret=false;
 		
-		if(o1>=0 && o2>=0 && o1<gr.size() && o2<gr.get(0).size()) {
-			gr.get(o1).set(02, Integer.MAX_VALUE);
+		if(o1>=0 && o2>=0 && o1<gr.size() && o2<gr.get(0).size() && gr.get(o1).get(o2)!=Integer.MAX_VALUE && gr.get(o2).get(o1)!=Integer.MAX_VALUE) {
+			gr.get(o1).set(o2, Integer.MAX_VALUE);
 			gr.get(o2).set(o1, Integer.MAX_VALUE);
 			ret=true;
 		}
@@ -203,7 +203,7 @@ public class GrafLoc {
 			if(gr.get(i).get(j)!=Integer.MAX_VALUE && gr.get(i).get(j)!=0 && !marcados.contains(j)) {	
 				encontrado=true;
 				recursiva(j);
-				j=0;
+				//j=0;
 			}
 		}
 	}
@@ -226,7 +226,13 @@ public class GrafLoc {
 				s=s+marcados.get(j);
 			}
 		}
-		System.out.print(s);
+		if(s==""){
+			System.out.print(s);
+		}
+		else{
+			System.out.println(s);
+		}
+		
 		marcados.clear();
 	}
 	

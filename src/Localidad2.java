@@ -20,28 +20,33 @@ public class Localidad2 extends Localidad implements Comparable<Localidad2>{
 	}
 	
 	public int compareTo(Localidad2 l) {
-		int comparacionNombre=this.getNombre().compareTo(l.getNombre());
+		if(l!=null){
+			int comparacionNombre=this.getNombre().compareTo(l.getNombre());
 		
-		if(comparacionNombre<0) {
-			return -1;
-		}
-		else {
-			if(comparacionNombre>0) {
-				return 1;
-			}
-			else {
-			if(this.getId()<l.getId()) {
+			if(comparacionNombre<0) {
 				return -1;
 			}
 			else {
-				if(this.getId()>l.getId()) {
+				if(comparacionNombre>0) {
 					return 1;
 				}
 				else {
-					return 0;
+					if(this.getId()<l.getId()) {
+						return -1;
+					}
+					else {
+						if(this.getId()>l.getId()) {
+							return 1;
+						}
+						else {
+							return 0;
+						}
+					}
 				}
 			}
 		}
+		else{
+			return -2;
 		}
 		
 	}
